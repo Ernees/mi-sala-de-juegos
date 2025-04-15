@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>About Me Profile card || Learning Robo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="registro.component.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+  </head>
+  <body>
+    <div class="about-wrapper">
+
+
+      <div class="about-left">
+          
+        <div class = "about-left-content">
+          <div>
+              <form [formGroup]="formulario" class="needs-validation">
+                <div class="mb-3 about-para">
+                  <label for="nombre">Nombre</label>
+                  <input type="text" class="form-control" formControlName="nombre" />
+                  @if (nombre?.errors !== null && nombre?.touched) {
+                    <div class="text-danger mt-1">
+                      @if (nombre?.hasError('required')) {
+                        <p>El nombre es requerido</p>
+                      }
+                      @if (nombre?.hasError('minlength')) {
+                        <p>El nombre requiere al menos 3 caracteres</p>
+                      }
+                      @if (nombre?.hasError('maxlength')) {
+                        <p>El nombre debe tener como máximo 15 caracteres</p>
+                      }
+                    </div>
+                  }
+                </div>
+
+                <div class="mb-3 about-para">
+                  <label for="apellido">Apellido</label>
+                  <input type="text" class="form-control" formControlName="apellido" />
+                  @if (apellido?.errors !== null && apellido?.touched) {
+                    <div class="text-danger mt-1">
+                      @if (apellido?.hasError('required')) {
+                        <p>El apellido es requerido</p>
+                      }
+                      @if (apellido?.hasError('minlength')) {
+                        <p>El apellido requiere {{ apellido?.getError('minlength').requiredLength }} caracteres</p>
+                      }
+                      @if (apellido?.hasError('maxlength')) {
+                        <p>El apellido debe tener como máximo {{ apellido?.getError('maxlength').requiredLength }} caracteres</p>
+                      }
+                    </div>
+                  }
+                </div>
+
+                <div class="mb-3 about-para">
+                  <label for="edad">Edad</label>
+                  <input type="number" class="form-control" formControlName="edad" />
+                  @if (edad?.errors !== null && edad?.touched) {
+                    <div class="text-danger mt-1">
+                      @if (edad?.hasError('required')) {
+                        <p>La edad es requerida</p>
+                      }
+                      @if (edad?.hasError('min')) {
+                        <p>Debes ser mayor de edad</p>
+                      }
+                      @if (edad?.hasError('max')) {
+                        <p>Debes tener menos de 40 años</p>
+                      }
+                    </div>
+                  }
+                </div>
+
+                <div class="about-btns">
+                  <button (click)="mostrarFormulario()" class="btn btn-white">Mostrar</button>
+                  <button (click)="validarFormulario()" class="btn btn-white">Validar</button>
+                  <button (click)="guardarDatos()" [disabled]="!formulario.valid" class="btn btn-pink">Guardar</button>
+                </div>
+              </form>
+          </div>
+        </div>
+        
+      </div>
+
+            <!-- LADO IZQUIERDO -->
+      <div class="about-right">
+        <div class="about-right-content">
+          <h1>Registro<span>!</span></h1>
+        </div>
+      </div>
+
+
+
+    </div>
+  </body>
+</html>
+
+
+
