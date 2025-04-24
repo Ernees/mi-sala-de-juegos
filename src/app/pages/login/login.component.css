@@ -111,6 +111,10 @@ body{
     font-size: 5rem;
     text-transform: uppercase;
 }
+.about-right h4 {
+    color: #ff0000;
+    text-transform: uppercase;
+}
 .about-right h1 span{
     color: #B721FF;
 }
@@ -119,6 +123,7 @@ body{
 }
 .about-btns{
     display: flex;
+    justify-content: center;
     margin: 2rem 0;
 }
 .btn{

@@ -114,11 +114,15 @@ body{
 .about-right h1 span{
     color: #B721FF;
 }
+.about-right h3 span{
+    color: #B721FF;
+}
 .about-right h2{
     font-weight: 600;
 }
 .about-btns{
     display: flex;
+    justify-content: center;
     margin: 2rem 0;
 }
 .btn{

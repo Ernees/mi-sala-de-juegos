@@ -1,41 +1,104 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>About Me Profile card || Learning Robo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="login.component.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="login.component.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <div class="about-wrapper">
-
-
-      
-      
-      
-      
-    
       <div class="about-left">
-        <div class = "about-left-content">
-          <div class = "about-para">
-                  <p>AQUI USTED TENDRA LA BIENVENIDA</p>
-                </div>
+        <div class="about-left-content">
+          <div>
+            <form [formGroup]="formulario" class="needs-validation">
+              <!-- Mail -->
+              <div class="mb-3 about-para">
+                <label for="mail">E-mail</label>
+                <input type="text" class="form-control" formControlName="mail" />
+                @if (mail?.errors !== null && mail?.touched) {
+                  <div class="text-danger mt-1">
+                    @if (mail?.errors?.['required']) {
+                      <p>El mail es requerido</p>
+                    }
+                    @if (mail?.errors?.['minlength']) {
+                      <p>
+                        El mail requiere al menos
+                        {{ mail?.errors?.['minlength']?.requiredLength }}
+                        caracteres
+                      </p>
+                    }
+                    @if (mail?.errors?.['maxlength']) {
+                      <p>
+                        El mail debe tener como máximo
+                        {{ mail?.errors?.['maxlength']?.requiredLength }}
+                        caracteres
+                      </p>
+                    }
+                    @if (mail?.errors?.['email']) {
+                      <p>El mail debe tener formato válido</p>
+                    }
+                    
+                  </div>
+                }
               </div>
-            </div>
-            
-            <div class="about-right">
-              <div class="about-right-content">
-                <h1>login<span>!</span></h1>
+
+              <!-- Password -->
+              <div class="mb-3 about-para">
+                <label for="password">Password</label>
+                <input type="text" class="form-control" formControlName="password" />
+                @if (password?.errors !== null && password?.touched) {
+                  <div class="text-danger mt-1">
+                    @if (password?.errors?.['required']) {
+                      <p>El password es requerido</p>
+                    }
+                    @if (password?.errors?.['minlength']) {
+                      <p>
+                        El password requiere al menos
+                        {{ password?.errors?.['minlength']?.requiredLength }}
+                        caracteres
+                      </p>
+                    }
+                    @if (password?.errors?.['maxlength']) {
+                      <p>
+                        El password debe tener como máximo
+                        {{ password?.errors?.['maxlength']?.requiredLength }}
+                        caracteres
+                      </p>
+                    }
+                  </div>
+                }
               </div>
-            </div>
 
 
+              <!-- Botón -->
+              <div class="about-btns">
+                <button (click)="iniciarSesion()" [disabled]="!formulario.valid" class="btn btn-pink">Iniciar Sesion</button>
+              </div>
+              @if(mensajeError() == "AuthApiError: Invalid login credentials"){
+                <!-- <h3>Ocurrio un error<span>!</span></h3> -->
+                <p>
+                  Email o password incorrectos, por favor intentelo de nuevo
+                </p>
+                
+              }
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-right">
+        <div class="about-right-content">
+          <h1>login<span>!</span></h1>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
-
-
-
-

@@ -10,7 +10,7 @@
   </head>
   <body>
     
-    @if(this.githubService.datosCliente)
+    @if(this.githubService.datosCliente())
     {
         <div class = "about-wrapper">
             
@@ -19,11 +19,11 @@
                     <div>
                         <div class = "shadow">
                         <div class = "about-img">
-                                <img [src]=this.githubService.datosCliente.avatar_url alt = "about image">
+                                <img [src]=this.githubService.datosCliente().avatar_url alt = "about image">
                         </div>
                         </div>
     
-                        <h2>{{this.githubService.datosCliente.name}}</h2>
+                        <h2>{{this.githubService.datosCliente().name}}</h2>
                         <h3>Web developer</h3>
                     </div>
                 </div>
@@ -31,13 +31,13 @@
             </div>
             <div class = "about-right">
                 <h1>Hello<span>!</span></h1>
-                <h2>I am {{this.githubService.datosCliente.login}}</h2>
+                <h2>I am {{this.githubService.datosCliente().login}}</h2>
                 <div class = "about-btns">
-                    <a href="{{this.githubService.datosCliente.html_url}}" class="btn btn-white">Git hub</a>
+                    <a href="{{this.githubService.datosCliente().html_url}}" class="btn btn-white">Git hub</a>
                 </div>
                 
                 <div class = "about-para">
-                    <p>{{this.githubService.datosCliente.bio}}</p>
+                    <p>{{this.githubService.datosCliente().bio}}</p>
                 </div>
             </div>
 
