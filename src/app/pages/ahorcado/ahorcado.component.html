@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenida</title>
+  <link rel="stylesheet" href="ahorcado.component.css">
+</head>
+    <body>
+    <div class="container">
+        <h1>Juego del Ahorcado</h1>
+        <p class="intentos">Intentos restantes: {{maxIntentos - intentos}}<p>
+    
+        <h2>{{ palabraOculta }}</h2>
+    
+        <div class="letras">
+            @for (letra of letras; track letra) {
+                <button [disabled]="letrasAdivinadas.has(letra) || letrasErroneas.has(letra) || juegoPerdido || juegoGanado" (click)="adivinar(letra)">{{ letra }}</button>
+            }
+            
+        </div>
+    
+        @if (juegoGanado) {
+        <div class="resultado exito">¡Ganaste! =)</div>
+        }
+    
+        @if (juegoPerdido) {
+        <div class="resultado error">
+            Perdiste =( La palabra era: <strong>{{ palabra }}</strong>
+        </div>
+        }
+        @if (juegoGanado || juegoPerdido){
+
+            <button (click)="resetearJuego()">Reiniciar juego</button>
+        }
+    
+    </div>
+    </body>

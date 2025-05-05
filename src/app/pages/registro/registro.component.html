@@ -1,146 +1,96 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>About Me Profile card || Learning Robo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="registro.component.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
-  </head>
-  <body>
-    <div class="about-wrapper">
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Registro | About Me Profile Card</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="registro.component.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" crossorigin="anonymous" />
+</head>
+
+<body>
+  <div class="about-wrapper">
+    <div class="about-left">
+      <div class="about-left-content">
+        <form [formGroup]="formulario" class="needs-validation">
 
 
-      <div class="about-left">
-          
-        <div class = "about-left-content">
-          <div>
-            <form [formGroup]="formulario" class="needs-validation">
-
-              <!-- Nombre -->
-              <div class="mb-3 about-para">
-                <label for="nombre">Nombre</label>
-                <input type="text" class="form-control" formControlName="nombre" />
-                @if (nombre?.errors !== null && nombre?.touched) {
-                  <div class="text-danger mt-1">
-                    @if (nombre?.errors?.['required']) {
-                      <p>El nombre es requerido</p>
-                    }
-                    @if (nombre?.errors?.['minlength']) {
-                      <p>El nombre requiere al menos 3 caracteres</p>
-                    }
-                    @if (nombre?.errors?.['maxlength']) {
-                      <p>El nombre debe tener como máximo 15 caracteres</p>
-                    }
-                  </div>
-                }
+          <div class="mb-3 about-para">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" class="form-control" formControlName="nombre" placeholder="Ingrese su nombre" />
+            @if (nombre?.errors && nombre?.touched) {
+              <div class="text-danger mt-1">
+                @if (nombre?.errors?.['required']) { <p>El nombre es requerido</p> }
+                @if (nombre?.errors?.['minlength']) { <p>El nombre requiere al menos 3 caracteres</p> }
+                @if (nombre?.errors?.['maxlength']) { <p>El nombre debe tener como máximo 15 caracteres</p> }
               </div>
-            
-              <!-- Apellido -->
-              <div class="mb-3 about-para">
-                <label for="apellido">Apellido</label>
-                <input type="text" class="form-control" formControlName="apellido" />
-                @if (apellido?.errors !== null && apellido?.touched) {
-                  <div class="text-danger mt-1">
-                    @if (apellido?.errors?.['required']) {
-                      <p>El apellido es requerido</p>
-                    }
-                    @if (apellido?.errors?.['minlength']) {
-                      <p>El apellido requiere al menos {{ apellido?.errors?.['minlength']?.requiredLength }} caracteres</p>
-                    }
-                    @if (apellido?.errors?.['maxlength']) {
-                      <p>El apellido debe tener como máximo {{ apellido?.errors?.['maxlength']?.requiredLength }} caracteres</p>
-                    }
-                  </div>
-                }
-              </div>
-            
-              <!-- Edad -->
-              <div class="mb-3 about-para">
-                <label for="edad">Edad</label>
-                <input type="number" class="form-control" formControlName="edad" />
-                @if (edad?.errors !== null && edad?.touched) {
-                  <div class="text-danger mt-1">
-                    @if (edad?.errors?.['required']) {
-                      <p>La edad es requerida</p>
-                    }
-                    @if (edad?.errors?.['min']) {
-                      <p>Debes ser mayor de edad</p>
-                    }
-                    @if (edad?.errors?.['max']) {
-                      <p>Debes tener menos de 80 años</p>
-                    }
-                  </div>
-                }
-              </div>
-            
-              <!-- Mail -->
-              <div class="mb-3 about-para">
-                <label for="mail">E-mail</label>
-                <input type="text" class="form-control" formControlName="mail" />
-                @if (mail?.errors !== null && mail?.touched) {
-                  <div class="text-danger mt-1">
-                    @if (mail?.errors?.['required']) {
-                      <p>El mail es requerido</p>
-                    }
-                    @if (mail?.errors?.['minlength']) {
-                      <p>El mail requiere al menos {{ mail?.errors?.['minlength']?.requiredLength }} caracteres</p>
-                    }
-                    @if (mail?.errors?.['maxlength']) {
-                      <p>El mail debe tener como máximo {{ mail?.errors?.['maxlength']?.requiredLength }} caracteres</p>
-                    }
-                    @if (mail?.errors?.['email']) {
-                      <p>El mail debe tener formato válido</p>
-                    }
-                  </div>
-                }
-              </div>
-            
-              <!-- Password -->
-              <div class="mb-3 about-para">
-                <label for="password">Password</label>
-                <input type="text" class="form-control" formControlName="password" />
-                @if (password?.errors !== null && password?.touched) {
-                  <div class="text-danger mt-1">
-                    @if (password?.errors?.['required']) {
-                      <p>El password es requerido</p>
-                    }
-                    @if (password?.errors?.['minlength']) {
-                      <p>El password requiere al menos {{ password?.errors?.['minlength']?.requiredLength }} caracteres</p>
-                    }
-                    @if (password?.errors?.['maxlength']) {
-                      <p>El password debe tener como máximo {{ password?.errors?.['maxlength']?.requiredLength }} caracteres</p>
-                    }
-                  </div>
-                }
-              </div>
-            
-              <!-- Botón -->
-              <div class="about-btns">
-                <button (click)="guardarDatos()" [disabled]="!formulario.valid" class="btn btn-pink">Registrarme</button>
-              </div>
-            
-            </form>
-            
-            
+            }
           </div>
-        </div>
-        
+
+
+          <div class="mb-3 about-para">
+            <label for="apellido">Apellido</label>
+            <input type="text" id="apellido" class="form-control" formControlName="apellido" placeholder="Ingrese su apellido" />
+            @if (apellido?.errors && apellido?.touched) {
+              <div class="text-danger mt-1">
+                @if (apellido?.errors?.['required']) { <p>El apellido es requerido</p> }
+                @if (apellido?.errors?.['minlength']) { <p>El apellido requiere al menos {{ apellido?.errors?.['minlength']?.requiredLength }} caracteres</p> }
+                @if (apellido?.errors?.['maxlength']) { <p>El apellido debe tener como máximo {{ apellido?.errors?.['maxlength']?.requiredLength }} caracteres</p> }
+              </div>
+            }
+          </div>
+
+          <div class="mb-3 about-para">
+            <label for="edad">Edad</label>
+            <input type="number" id="edad" class="form-control" formControlName="edad" placeholder="Ingrese su edad" min="1" />
+            @if (edad?.errors && edad?.touched) {
+              <div class="text-danger mt-1">
+                @if (edad?.errors?.['required']) { <p>La edad es requerida</p> }
+                @if (edad?.errors?.['min']) { <p>Debes ser mayor de edad</p> }
+                @if (edad?.errors?.['max']) { <p>Debes tener menos de 80 años</p> }
+              </div>
+            }
+          </div>
+
+
+          <div class="mb-3 about-para">
+            <label for="mail">E-mail</label>
+            <input type="email" id="mail" class="form-control" formControlName="mail" placeholder="Ingrese su correo electrónico" />
+            @if (mail?.errors && mail?.touched) {
+              <div class="text-danger mt-1">
+                @if (mail?.errors?.['required']) { <p>El mail es requerido</p> }
+                @if (mail?.errors?.['minlength']) { <p>El mail requiere al menos {{ mail?.errors?.['minlength']?.requiredLength }} caracteres</p> }
+                @if (mail?.errors?.['maxlength']) { <p>El mail debe tener como máximo {{ mail?.errors?.['maxlength']?.requiredLength }} caracteres</p> }
+                @if (mail?.errors?.['email']) { <p>El mail debe tener formato válido</p> }
+              </div>
+            }
+          </div>
+
+
+          <div class="mb-3 about-para">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" class="form-control" formControlName="password" placeholder="Ingrese su contraseña" />
+            @if (password?.errors && password?.touched) {
+              <div class="text-danger mt-1">
+                @if (password?.errors?.['required']) { <p>La contraseña es requerida</p> }
+                @if (password?.errors?.['minlength']) { <p>La contraseña requiere al menos {{ password?.errors?.['minlength']?.requiredLength }} caracteres</p> }
+                @if (password?.errors?.['maxlength']) { <p>La contraseña debe tener como máximo {{ password?.errors?.['maxlength']?.requiredLength }} caracteres</p> }
+              </div>
+            }
+          </div>
+
+
+          <div class="about-btns">
+            <button type="button" (click)="guardarDatos()" [disabled]="!formulario.valid" class="btn btn-pink">Registrarme</button>
+          </div>
+
+        </form>
       </div>
-
-            <!-- LADO IZQUIERDO -->
-      <div class="about-right">
-        <div class="about-right-content">
-          <h1>Registro<span>!</span></h1>
-      </div>
-
-
-
     </div>
 
+  </div>
 
-
-
-
+</body>
+</html>
 <router-outlet></router-outlet>

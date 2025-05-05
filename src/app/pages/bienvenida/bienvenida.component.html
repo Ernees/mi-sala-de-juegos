@@ -1,44 +1,47 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>About Me Profile card || Learning Robo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="bienvenida.component.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
-  </head>
-  <body>
-    <div class="about-wrapper">
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenida</title>
+  <link rel="stylesheet" href="bienvenida.component.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Bienvenido a la Sala de juegos</h1>
+    <div class="buttons">
+      @if (this.authService.user() === null) {
+        <button type="button" routerLink="/registro" class="btn">
+          Registrarse
+        </button>
+        <button type="button" routerLink="/login" class="btn">
+          Iniciar sesión
+        </button>
 
-      
-      <div class="about-left">
-          <div class = "about-left-content">
-              <div class = "about-para">
-                  <p>AQUI USTED TENDRA LA BIENVENIDA</p>
-              </div>
-          </div>
-      </div>
-      <div class="about-right">
-        <div class="about-right-content">
-          @if (this.authService.user()!== null){
-            <h1>Bienvenido<span>!</span></h1><br>
-            <h4>{{this.authService.user()!.email}}</h4><br>
-            <button  class="btn btn-white" (click)="cerrarSesion()">cerrar sesion</button>
-          } @else {
-            <h1>Hola<span>!</span></h1><br>
-            <div class="about-btns">
-              <button class="btn btn-white" routerLink="/registro">registrarse</button>
-              <button class="btn btn-white" routerLink="/login">iniciar sesion</button> 
-            </div>
-          }
-        </div>
-      </div>
-
-      
-    
-
+        } @else {
+        <span class="user">HOLA! {{ authService.user()!.email }}</span><br>
+        <button type="button" class="btn" (click)="cerrarSesion()">Cerrar sesión</button>
+        }
     </div>
+    <div class="cards">
+      <button class="card" type="button" routerLink="/ahorcado">
+        <h2>Ahorcado</h2>
+        
+      </button>
+      <button class="card" type="button" routerLink="/mayor-menor">
+        <h2>Mayor-Menor</h2>
+        
+      </button>
+      <button class="card" type="button" routerLink="/preguntados">
+        <h2>Preguntados</h2>
+        
+      </button>
+      <button class="card" type="button" routerLink="/bienvenida">
+        <h2>Juego Propio</h2>
+        
+      </button>
+    </div>
+  </div>
 </body>
 </html>
 <router-outlet></router-outlet>

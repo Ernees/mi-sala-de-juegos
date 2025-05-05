@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthResponse, createClient, SupabaseClient } from '@supabase/supabase-js';
-import { Usuario } from '../classes/usuario';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 // import { createClient, SupabaseClient } from '@supabase/supabase-js';
 @Injectable({
   providedIn: 'root'
@@ -15,6 +14,22 @@ export class DbService {
     const { data, error } = await this.supabase
       .from("registros")
       .insert([usuario]);
+      return { data, error };
+  }
+  async guardarPartida(partida: { 
+    id?: string;
+    usuario: string;               
+    palabra: string;                
+    letras_adivinadas: string[];    
+    letras_erroneas: string[];      
+    intentos: number;               
+    resultado: string; 
+    letras_seleccionadas_total: number;
+  }
+  ) {
+    const { data, error } = await this.supabase
+      .from("puntajes_ahorcado")
+      .insert([partida]);
       return { data, error };
   }
 }

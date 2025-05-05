@@ -1,26 +1,38 @@
 import { Routes } from '@angular/router';
-import { SobreMiComponent } from './pages/sobre-mi/sobre-mi.component';
-import { RegistroComponent } from './pages/registro/registro.component';
-import { LoginComponent } from './pages/login/login.component';
-import { BienvenidaComponent } from './pages/bienvenida/bienvenida.component';
-
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
         path:"sobre-mi",
-        component:SobreMiComponent
+        loadComponent: () => import("./pages/sobre-mi/sobre-mi.component").then((modulo) => modulo.SobreMiComponent)
     },
     {
         path:"registro",
-        component:RegistroComponent
+        loadComponent: () => import("./pages/registro/registro.component").then((modulo) => modulo.RegistroComponent)
     },
     {
         path:"login",
-        component:LoginComponent
+        loadComponent: () => import("./pages/login/login.component").then((modulo) => modulo.LoginComponent)
     },
     {
         path:"bienvenida",
-        component:BienvenidaComponent
+        loadComponent: () => import("./pages/bienvenida/bienvenida.component").then((modulo) => modulo.BienvenidaComponent)
+        
+    },
+    {
+        path:"ahorcado",
+        loadComponent: () => import("./pages/ahorcado/ahorcado.component").then((modulo) => modulo.AhorcadoComponent),
+        canActivate:[authGuard]
+    },
+    {
+        path:"mayor-menor",
+        loadComponent: () => import("./pages/mayor-menor/mayor-menor.component").then((modulo) => modulo.MayorMenorComponent),
+        canActivate:[authGuard]
+    },
+    {
+        path:"preguntados",
+        loadComponent: () => import("./pages/preguntados/preguntados.component").then((modulo) => modulo.PreguntadosComponent),
+        canActivate:[authGuard]
     },
 
 
