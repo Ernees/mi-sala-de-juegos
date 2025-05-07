@@ -11,6 +11,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 export class BienvenidaComponent {
   authService = inject(AuthService);
 
+  
   altaCuenta(){
     this.authService.crearCuenta("huertaernesto04@gmail.com", "123456789")
   }

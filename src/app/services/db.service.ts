@@ -16,7 +16,7 @@ export class DbService {
       .insert([usuario]);
       return { data, error };
   }
-  async guardarPartida(partida: { 
+  async guardarPartidaAhorcado(partida: { 
     id?: string;
     usuario: string;               
     palabra: string;                
@@ -24,11 +24,21 @@ export class DbService {
     letras_erroneas: string[];      
     intentos: number;               
     resultado: string; 
-    letras_seleccionadas_total: number;
-  }
-  ) {
+    letras_seleccionadas_total: number;}) {
     const { data, error } = await this.supabase
       .from("puntajes_ahorcado")
+      .insert([partida]);
+      return { data, error };
+  }
+  async guardarPartidaMm(partida: { 
+    id?: string;
+    usuario: string;   
+    aciertos: number;
+    errores: number;
+    resultado: string;
+  }) {
+    const { data, error } = await this.supabase
+      .from("puntajes_mayor_menor")
       .insert([partida]);
       return { data, error };
   }

@@ -10,24 +10,27 @@
   </head>
   <body>
     <div class="container">
-        <h1>Mayor o Menor</h1>
-      
-        @if (cartaActual !== null) {
-          <p>Carta actual: <strong>{{ cartaActual }}</strong></p>
-        }
-      
-        @if (!juegoTerminado) {
+        <div>
+          <h2>Juego Mayor o Menor</h2>
+          <p>Carta actual: {{ cartaActual }}</p>
+        
           <div class="opciones">
-            <button (click)="elegir('mayor')">Mayor</button>
-            <button (click)="elegir('menor')">Menor</button>
+            <button (click)="elegir('mayor')" [disabled]="juegoTerminado">Mayor</button>
+            <button (click)="elegir('menor')" [disabled]="juegoTerminado">Menor</button>
           </div>
-        }
-      
-        @if (mensaje) {
-          <p class="mensaje">{{ mensaje }}</p>
-        }
-      
-        <button (click)="iniciarJuego()">Reiniciar</button>
-      </div>
+        
+          <p>{{ mensaje }}</p>
+        
+          <p>Aciertos: {{ aciertos }}</p>
+          <p>Errores: {{ errores }}</p>
+        
+          
+          
+          @if (juegoTerminado) {
+            <button (click)="empezarJuego()">Reiniciar</button>
+            <p>{{ mensajeFinal }}</p>
+            }
+        </div>        
+        </div>        
       
   </body>

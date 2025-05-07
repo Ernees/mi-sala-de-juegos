@@ -10,6 +10,7 @@ export class AuthService {
   user = signal<User | null>(null);
   router = inject(Router);
 
+
   constructor() {
     this.supabase = createClient(
       'https://mvlwoqefaopnsgjinxxz.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im12bHdvcWVmYW9wbnNnamlueHh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU1MDAxMzcsImV4cCI6MjA2MTA3NjEzN30.mum7sFoaLM3gWtiEmM0UvCl8vSD09KWNanyTLnnzYHY');
@@ -48,7 +49,7 @@ export class AuthService {
     }
     return { data, error };
   }
-
+  
   // Cerrar la sesion
   async cerrarSesion() {
     const { error } = await this.supabase.auth.signOut();

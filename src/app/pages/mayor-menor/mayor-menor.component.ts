@@ -1,58 +1,94 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { DbService } from '../../services/db.service';
 
 @Component({
   selector: 'app-mayor-menor',
-  imports: [],
   templateUrl: './mayor-menor.component.html',
-  styleUrl: './mayor-menor.component.css'
+  styleUrls: ['./mayor-menor.component.css']
 })
 export class MayorMenorComponent {
-  baraja: number[] = [1, 2, 3, 4, 5, 6, 7, 10, 11, 12];
+  baraja = [1, 2, 3, 4, 5, 6, 7, 10, 11, 12];
   mazo: number[] = [];
-  cartaActual: number | null = null;
-  cartaSiguiente: number | null = null;
-  mensaje = '';
+  cartaActual: number = 0;
+  supabase = inject(AuthService);
+  db = inject(DbService);
+  mensaje = "";
   juegoTerminado = false;
+  aciertos = 0;
+  errores = 0;
+  resultado = "";
+  mensajeFinal = "";
 
   constructor() {
-    this.iniciarJuego();
+    this.empezarJuego();
   }
 
-  iniciarJuego() {
-    this.mazo = [...this.baraja];
-    this.shuffle(this.mazo);
-    this.cartaActual = this.mazo.pop()!;
-    this.cartaSiguiente = null;
-    this.mensaje = '';
+  empezarJuego() {
+    this.mazo = this.baraja.sort(() => Math.random() - 0.5);
+    this.cartaActual = this.mazo.pop() || 0;
+    this.mensaje = "";
     this.juegoTerminado = false;
+    this.aciertos = 0;
+    this.errores = 0;
+    this.mensajeFinal = "";
   }
 
-  shuffle(array: number[]) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-  }
-
-  elegir(opcion: 'mayor' | 'menor') {
-    if (!this.mazo.length) {
-      this.mensaje = '¡No quedan más cartas!';
-      this.juegoTerminado = true;
+  elegir(opcion: string) {
+    if (this.mazo.length === 0) {
+      this.terminarJuego();
       return;
     }
 
-    this.cartaSiguiente = this.mazo.pop()!;
-    const gano =
-      (opcion === 'mayor' && this.cartaSiguiente > this.cartaActual!) ||
-      (opcion === 'menor' && this.cartaSiguiente < this.cartaActual!);
+    const siguienteCarta = this.mazo.pop() || 0;
 
-    if (gano) {
-      this.mensaje = '¡Correcto!';
-      this.cartaActual = this.cartaSiguiente;
-      this.cartaSiguiente = null;
+    if (opcion === "mayor" && siguienteCarta > this.cartaActual) {
+      this.mensaje = "Acertaste!";
+      this.aciertos++;
+    } else if (opcion === "menor" && siguienteCarta < this.cartaActual) {
+      this.mensaje = "Acertaste!";
+      this.aciertos++;
     } else {
-      this.mensaje = `¡Perdiste! La carta era ${this.cartaSiguiente}`;
-      this.juegoTerminado = true;
+      this.mensaje = `Erraste. Era ${siguienteCarta}`;
+      this.errores++;
     }
+
+    this.cartaActual = siguienteCarta;
+
+    if (this.mazo.length === 0) {
+      this.terminarJuego();
+    }
+  }
+
+  async terminarJuego() {
+    this.juegoTerminado = true;
+    if (this.aciertos > this.errores) {
+      this.mensajeFinal = "Ganaste la partida =)";
+      this.resultado = "ganado";
+    } else if (this.aciertos < this.errores) {
+      this.mensajeFinal = "Perdiste la partida =(";
+      this.resultado = "perdido";
+    } else {
+      this.mensajeFinal = "Empate =|";
+      this.resultado = "empatado";
+    }
+    const cartasAcertadas = this.aciertos;
+    const cartasErradas = this.errores;
+    const resultado: string = this.resultado;
+
+    //guardo los datos antes guardados
+    const user = await this.supabase.getDatosUsuarioActual();
+    if (!user) return;
+    
+    const datosPartida = {
+      id:user.id,
+      usuario: user.nombre,
+      aciertos: cartasAcertadas,
+      errores: cartasErradas,
+      resultado: resultado
+    };
+  
+    console.log("Datos de la partida:", datosPartida);
+    this.db.guardarPartidaMm(datosPartida);
   }
 }

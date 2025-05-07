@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
+import { logeadoGuard } from './guards/logeado.guard';
 
 export const routes: Routes = [
     {
@@ -8,11 +9,15 @@ export const routes: Routes = [
     },
     {
         path:"registro",
-        loadComponent: () => import("./pages/registro/registro.component").then((modulo) => modulo.RegistroComponent)
+        loadComponent: () => import("./pages/registro/registro.component").then((modulo) => modulo.RegistroComponent),
+        // canActivate:[logeadoGuard]
+        // canActivate:[authGuard]
     },
     {
         path:"login",
-        loadComponent: () => import("./pages/login/login.component").then((modulo) => modulo.LoginComponent)
+        loadComponent: () => import("./pages/login/login.component").then((modulo) => modulo.LoginComponent),
+        // canActivate:[logeadoGuard]
+        // canActivate:[authGuard]
     },
     {
         path:"bienvenida",
@@ -34,7 +39,4 @@ export const routes: Routes = [
         loadComponent: () => import("./pages/preguntados/preguntados.component").then((modulo) => modulo.PreguntadosComponent),
         canActivate:[authGuard]
     },
-
-
-
 ];

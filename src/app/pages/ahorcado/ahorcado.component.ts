@@ -106,6 +106,6 @@ export class AhorcadoComponent {
     };
   
     console.log('Datos de la partida:', datosPartida);
-    this.dbAhorcado.guardarPartida(datosPartida);
+    this.dbAhorcado.guardarPartidaAhorcado(datosPartida);
   }
 }
