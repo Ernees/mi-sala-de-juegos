@@ -81,8 +81,7 @@ export class MayorMenorComponent {
     if (!user) return;
     
     const datosPartida = {
-      id:user.id,
-      usuario: user.nombre,
+      id_usuario: user.id,
       aciertos: cartasAcertadas,
       errores: cartasErradas,
       resultado: resultado

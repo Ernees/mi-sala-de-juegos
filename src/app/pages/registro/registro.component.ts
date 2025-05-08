@@ -45,6 +45,7 @@ export class RegistroComponent {
         console.error('Error al guardar en Supabase:', error);
       } else {
         console.log('Usuario guardado:', data);
+        this.authService.router.navigateByUrl("/bienvenida");
         this.formulario.reset();
       }
     }

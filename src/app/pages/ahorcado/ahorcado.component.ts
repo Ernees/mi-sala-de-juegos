@@ -41,9 +41,14 @@ export class AhorcadoComponent {
   ];
 
   constructor(){
+    this.empezarJuego();
+  }
+
+  empezarJuego(){
+    this.letrasAdivinadas.clear();
+    this.letrasErroneas.clear();
     this.elegirPalabraAleatoria();
-    this.maxIntentos = this.palabra.length
-    
+    this.maxIntentos = this.palabra.length;
   }
 
   adivinar(letra: string) {
@@ -51,6 +56,10 @@ export class AhorcadoComponent {
       this.letrasAdivinadas.add(letra);
     } else {
       this.letrasErroneas.add(letra);
+    }
+    if(this.juegoGanado || this.juegoPerdido){
+      console.log("entre aca")
+      this.guardarJuego();
     }
   }
 
@@ -78,7 +87,8 @@ export class AhorcadoComponent {
     return this.palabra.split('').every((l) => this.letrasAdivinadas.has(l));
   }
 
-  async resetearJuego() {
+  async guardarJuego() {
+
     //recolecto los datos de la partida jugada
     const totalLetrasSeleccionadas = this.letrasAdivinadas.size + this.letrasErroneas.size;
     const arrayLetrasCorrectas = Array.from(this.letrasAdivinadas);
@@ -86,17 +96,13 @@ export class AhorcadoComponent {
     const palabra = this.palabra;
     const intentos = this.intentos;
     const resultado: string = this.juegoGanado ? 'ganado' : 'perdido';
-    //reseteo los datos para empezar una partida nueva
-    this.letrasAdivinadas.clear();
-    this.letrasErroneas.clear();
-    this.elegirPalabraAleatoria();
+
     //guardo los datos antes guardados
     const user = await this.supabase.getDatosUsuarioActual();
     if (!user) return;
     
     const datosPartida = {
-      id:user.id,
-      usuario: user.nombre,
+      id_usuario: user.id,
       palabra: palabra,
       letras_adivinadas: arrayLetrasCorrectas,
       letras_erroneas: arrayLetrasIncorrectas,
@@ -108,4 +114,5 @@ export class AhorcadoComponent {
     console.log('Datos de la partida:', datosPartida);
     this.dbAhorcado.guardarPartidaAhorcado(datosPartida);
   }
+  
 }

@@ -1,15 +1,8 @@
-export class Usuario {
-    nombre: string; 
-    apellido: string; 
-    edad: number;
-    email:string; 
-    password:string;
+import { Mensaje } from "./mensaje";
 
-    constructor(nombre: string, apellido: string, edad: number, email:string, password:string) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.edad = edad;
-        this.email=email;
-        this.password=password;
-    }
+export class Usuario {
+    id?: string;
+    created_at?: Date;
+    nombre?: string;
+    // mensajes?: Mensaje[];
 }

@@ -2,16 +2,15 @@ import { inject } from '@angular/core';
 import { CanActivateFn } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
-export const logeadoGuard: CanActivateFn = (route, state) => {
+export const logeadoGuard: CanActivateFn = async (route, state) => {
   const authService = inject(AuthService);
-  console.log(authService.user)
-  console.log(!authService.getDatosUsuarioActual)
-  if (!authService.user()) {
-    // authService.router.navigate(['/bienvenida']);
-    console.log("me deja")
-    return true;
+  const { data } = await authService.supabase.auth.getSession();
+  
+  if (data.session) {
+    authService.router.navigateByUrl("/bienvenido");
+    return false;
   }
-  console.log("NO me deja")
-  return false;
+  console.log("Te dejo apsar")
+  return true;
   
 };

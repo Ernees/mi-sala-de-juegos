@@ -17,14 +17,11 @@ export class AuthService {
     this.supabase.auth.onAuthStateChange((event, session) => {
       if (session === null) {
         this.user.set(null);
-        this.router.navigateByUrl("/bienvenida");
         return;
       }
       
       this.supabase.auth.getUser().then(({ data, error }) => {
-        this.user.set(data.user);
-        this.router.navigateByUrl("/bienvenida");
-      });
+        this.user.set(data.user);});
     });
   }
 
@@ -51,7 +48,7 @@ export class AuthService {
   }
   
   // Cerrar la sesion
-  async cerrarSesion() {
+  async singOut() {
     const { error } = await this.supabase.auth.signOut();
     console.log("error en cerrar sesion",error);
   }

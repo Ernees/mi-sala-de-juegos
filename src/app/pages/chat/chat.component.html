@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bienvenida</title>
+    <link rel="stylesheet" href="chat.component.css" />
+  </head>
+  <body>
+    <!-- <div class="container"> -->
+    <!-- <h1>Bienvenid al chat</h1>
+
+      <div>
+        @for (m of chat(); track m.id) {
+        <div>
+            <h5>{{ m.registros?.nombre }}</h5>
+            <strong>{{ m.mensaje }}</strong>
+            <p>{{ m.created_at }}</p>
+        </div>
+        }
+      </div> -->
+    <div class="container">
+      <h1>Bienvenid al chat</h1>
+
+      <div class="chat-messages">
+        @if (usuarioActual()) { 
+            @for (m of chat(); track m.id) { 
+                @if(m.registros?.id === this.usuarioActual()?.id) {
+                    
+                    <div class="chat-message sent">
+                    <h6>Yo</h6>
+                    <strong>{{ m.mensaje }}</strong>
+                    <p>{{ m.created_at }}</p>
+                    </div>
+                    } @else {
+                    <div class="chat-message received">
+                    <h5>{{ m.registros?.nombre }}</h5>
+                    <strong>{{ m.mensaje }}</strong>
+                    <p>{{ m.created_at }}</p>
+                    </div>
+                    } 
+                }
+            }
+      </div>
+
+      <div class="chat-input">
+        <input [formControl]="mensajeControl" placeholder="Escribi tu mensaje...">
+        <button (click)="enviarMensaje()" (keyup.enter)="enviarMensaje()">Enviar</button>
+      </div>
+    </div>
+  </body>
+  <router-outlet></router-outlet>
+</html>

@@ -10,13 +10,13 @@ export const routes: Routes = [
     {
         path:"registro",
         loadComponent: () => import("./pages/registro/registro.component").then((modulo) => modulo.RegistroComponent),
-        // canActivate:[logeadoGuard]
+        canActivate:[logeadoGuard]
         // canActivate:[authGuard]
     },
     {
         path:"login",
         loadComponent: () => import("./pages/login/login.component").then((modulo) => modulo.LoginComponent),
-        // canActivate:[logeadoGuard]
+        canActivate:[logeadoGuard]
         // canActivate:[authGuard]
     },
     {
@@ -39,4 +39,20 @@ export const routes: Routes = [
         loadComponent: () => import("./pages/preguntados/preguntados.component").then((modulo) => modulo.PreguntadosComponent),
         canActivate:[authGuard]
     },
+    {
+        path:"chat",
+        loadComponent: () => import("./pages/chat/chat.component").then((modulo) => modulo.ChatComponent),
+        canActivate:[authGuard]
+    },
+    {
+        path: '',
+        redirectTo: 'bienvenida', // o la que quieras por defecto
+        pathMatch: 'full'
+    },
+    {
+        path: '**',
+        redirectTo: 'bienvenida' // o alguna página de error
+    }
+      
+      
 ];

@@ -17,10 +17,13 @@
         <button type="button" routerLink="/login" class="btn">
           Iniciar sesión
         </button>
-
-        } @else {
+        
+      } @else {
         <span class="user">HOLA! {{ authService.user()!.email }}</span><br>
         <button type="button" class="btn" (click)="cerrarSesion()">Cerrar sesión</button>
+        <button type="button" routerLink="/chat" class="btn">
+          Chat
+        </button>
         }
     </div>
     <div class="cards">

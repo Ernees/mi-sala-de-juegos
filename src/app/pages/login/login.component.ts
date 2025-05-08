@@ -35,6 +35,7 @@ export class LoginComponent {
       this.mensajeError.set("");
       this.formulario.reset();
     }
+    this.authService.router.navigateByUrl("/bienvenida");
   }
   
   
