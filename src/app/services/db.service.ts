@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createClient, RealtimeChannel, SupabaseClient } from '@supabase/supabase-js';
 import { Mensaje } from '../classes/mensaje';
+import { Resultados } from '../classes/resultado';
 // import { createClient, SupabaseClient } from '@supabase/supabase-js';
 @Injectable({
   providedIn: 'root'
@@ -20,10 +21,6 @@ export class DbService {
       return { data, error };
   }
 
-
-
-
-
   async guardarPartidaAhorcado(partida: { 
     id_usuario: string;               
     palabra: string;                
@@ -38,7 +35,17 @@ export class DbService {
       return { data, error };
   }
 
-
+  async guardarPartidaAdivina(datos: {
+    id_usuario: string;
+    resultado: string;
+    numero: number;
+    intentos: number;}) {
+    const { data, error } = await this.supabase
+      .from("partidas_adivina_numero")
+      .insert([datos]);
+      return { data, error };
+  }
+  
 
 
 
@@ -55,34 +62,52 @@ export class DbService {
       return { data, error };
   }
 
-
-
-
-
-
+  
+  
+  
+  
+  
   async guardarChat(chat: { 
     mensaje:string|null;
     id_usuario?: string;
   }) {
     const { data, error } = await this.supabase
-      .from("chat")
-      .insert([chat]);
-      return { data, error };
+    .from("chat")
+    .insert([chat]);
+    return { data, error };
+  }
+  async guardarResultadoGeneral(nombreJuego:string, resultado:string, id_usuario: string){
+    const { data, error }=  await this.supabase
+    .from("resultados")
+    .insert({
+      id_usuario: id_usuario,
+      juego: nombreJuego,
+      resultado: resultado
+    });
+    return { data, error };
   }
 
 
   async crear(mensaje: string, id_usuario: number) {
     // mensaje
     await this.supabase
-      .from('chat')
+      .from("chat")
       .insert({ mensaje: mensaje, id_usuario: id_usuario });  
   }
 
   async traer() {
     const { data } = await this.supabase
-      .from('chat')
-      .select('id, created_at, mensaje, registros (id, nombre)');
+      .from("chat")
+      .select("id, created_at, mensaje, registros (id, nombre)");
     return data as Mensaje[];
   }
 
-}
+
+  async traerResultados(){
+    const { data } = await this.supabase
+    .from("resultados")
+    .select("id_usuario, juego, resultado, registros(id,nombre)");
+    return data as Resultados[];
+  }
+  }
+  

@@ -1,0 +1,27 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenida</title>
+  <link rel="stylesheet" href="resultados.component.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Ranking!</h1>
+
+        @for (jugador of ranking(); track jugador.id_usuario) {
+        <p><strong>{{ jugador.nombre }}</strong></p>
+        <p>Partidas jugadas: {{ jugador.partidas }}</p>
+        <p>Puntos: {{ jugador.puntos }}</p>
+        <hr />
+        }
+        <!-- <h1>Ranking!</h1> -->
+        <!-- @for (m of resultados(); track m.id) { 
+                <p>{{m.id_usuario}}</p>
+                <p>{{m.resultado}}</p>
+                <p>{{m.juego}}</p>
+                <p>{{m.registros?.nombre}}</p>
+       } -->
+    </div>
+</body>

@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
 import { logeadoGuard } from './guards/logeado.guard';
+import { ResultadosComponent } from './pages/resultados/resultados.component';
 
 export const routes: Routes = [
     {
@@ -42,6 +43,16 @@ export const routes: Routes = [
     {
         path:"chat",
         loadComponent: () => import("./pages/chat/chat.component").then((modulo) => modulo.ChatComponent),
+        canActivate:[authGuard]
+    },
+    {
+        path:"adivina-numero",
+        loadComponent: () => import("./pages/adivina-numero/adivina-numero.component").then((modulo) => modulo.AdivinaNumeroComponent),
+        canActivate:[authGuard]
+    },
+    {
+        path:"resultados",
+        loadComponent: () => import("./pages/resultados/resultados.component").then((modulo) => modulo.ResultadosComponent),
         canActivate:[authGuard]
     },
     {

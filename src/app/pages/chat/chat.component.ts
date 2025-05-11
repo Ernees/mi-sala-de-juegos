@@ -33,28 +33,27 @@ export class ChatComponent {
 
     // detectar cambios
     this.db.canal.on("postgres_changes", { event: "INSERT", schema: 'public', table: 'chat',
-    }, (payload) => {
+    }, async (payload) => {
       const array: Mensaje[] = this.chat();
-      array.push(payload.new as Mensaje);
+      const nuevoMensaje = payload.new as Mensaje;
+      console.log(nuevoMensaje)
+      // select de la tabla usuarios
+      const {data: usuario, error} = await this.db.supabase
+      .from("registros")
+      .select("*")
+      .eq("id", nuevoMensaje.id_usuario) 
+      .single();
+      //asigno al mensaje el usuario actualizado
+      nuevoMensaje.registros = usuario;
+      array.push(nuevoMensaje);
       this.chat.set([...array]);
-    });
-
-    this.db.canal.on("postgres_changes", { event: "INSERT", schema: 'public', table: 'registros',
-    }, (payload) => {
-      console.log("cambios")
     });
     
     this.db.canal.subscribe();
     
   }
 
-
-
   async enviarMensaje() {
-    // const cartasAcertadas = this.aciertos;
-    // const cartasErradas = this.errores;
-    // const resultado: string = this.resultado;
-
     //guardo los datos antes guardados
     const mensaje = this.mensajeControl.value;
     const user = await this.authService.getDatosUsuarioActual();
@@ -70,7 +69,8 @@ export class ChatComponent {
     this.db.guardarChat(datosChat);
     this.mensajeControl.reset();
   }
-
-
-
+  ngOnDestroy(){
+    this.db.canal.unsubscribe();
+  }
+  //unsuscribe en el ngdestroy
 }

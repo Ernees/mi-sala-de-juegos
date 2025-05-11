@@ -7,18 +7,6 @@
     <link rel="stylesheet" href="chat.component.css" />
   </head>
   <body>
-    <!-- <div class="container"> -->
-    <!-- <h1>Bienvenid al chat</h1>
-
-      <div>
-        @for (m of chat(); track m.id) {
-        <div>
-            <h5>{{ m.registros?.nombre }}</h5>
-            <strong>{{ m.mensaje }}</strong>
-            <p>{{ m.created_at }}</p>
-        </div>
-        }
-      </div> -->
     <div class="container">
       <h1>Bienvenid al chat</h1>
 
@@ -28,7 +16,7 @@
                 @if(m.registros?.id === this.usuarioActual()?.id) {
                     
                     <div class="chat-message sent">
-                    <h6>Yo</h6>
+                    <h6>Tú</h6>
                     <strong>{{ m.mensaje }}</strong>
                     <p>{{ m.created_at }}</p>
                     </div>
@@ -45,7 +33,7 @@
 
       <div class="chat-input">
         <input [formControl]="mensajeControl" placeholder="Escribi tu mensaje...">
-        <button (click)="enviarMensaje()" (keyup.enter)="enviarMensaje()">Enviar</button>
+        <button (click)="enviarMensaje()" [disabled]="!mensajeControl.value?.trim()">Enviar</button>
       </div>
     </div>
   </body>

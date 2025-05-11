@@ -1,9 +1,10 @@
 import { Usuario } from "./usuario";
 
-export class Mensaje {
+export class Resultados {
     id?: number;
-    created_at?: Date;
-    mensaje?: string;
+    juego?: string;
+    partidas?: number;
+    resultado?: string;
     id_usuario?: string;
     registros?: Usuario;
 }

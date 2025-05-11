@@ -8,7 +8,7 @@ import { DbService } from '../../services/db.service';
   styleUrls: ['./mayor-menor.component.css']
 })
 export class MayorMenorComponent {
-  baraja = [1, 2, 3, 4, 5, 6, 7, 10, 11, 12];
+  baraja:number [] = [];
   mazo: number[] = [];
   cartaActual: number = 0;
   supabase = inject(AuthService);
@@ -25,6 +25,7 @@ export class MayorMenorComponent {
   }
 
   empezarJuego() {
+    this.baraja = [1, 2, 3, 4, 5, 6, 7, 10, 11, 12];
     this.mazo = this.baraja.sort(() => Math.random() - 0.5);
     this.cartaActual = this.mazo.pop() || 0;
     this.mensaje = "";
@@ -68,9 +69,6 @@ export class MayorMenorComponent {
     } else if (this.aciertos < this.errores) {
       this.mensajeFinal = "Perdiste la partida =(";
       this.resultado = "perdido";
-    } else {
-      this.mensajeFinal = "Empate =|";
-      this.resultado = "empatado";
     }
     const cartasAcertadas = this.aciertos;
     const cartasErradas = this.errores;
@@ -89,5 +87,6 @@ export class MayorMenorComponent {
   
     console.log("Datos de la partida:", datosPartida);
     this.db.guardarPartidaMm(datosPartida);
+    this.db.guardarResultadoGeneral("mayor-menor", resultado, user.id);
   }
 }

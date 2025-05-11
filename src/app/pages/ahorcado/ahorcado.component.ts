@@ -58,7 +58,6 @@ export class AhorcadoComponent {
       this.letrasErroneas.add(letra);
     }
     if(this.juegoGanado || this.juegoPerdido){
-      console.log("entre aca")
       this.guardarJuego();
     }
   }
@@ -97,7 +96,7 @@ export class AhorcadoComponent {
     const intentos = this.intentos;
     const resultado: string = this.juegoGanado ? 'ganado' : 'perdido';
 
-    //guardo los datos antes guardados
+    //guardo los datos antes recolectados
     const user = await this.supabase.getDatosUsuarioActual();
     if (!user) return;
     
@@ -113,6 +112,7 @@ export class AhorcadoComponent {
   
     console.log('Datos de la partida:', datosPartida);
     this.dbAhorcado.guardarPartidaAhorcado(datosPartida);
+    this.dbAhorcado.guardarResultadoGeneral("ahorcado", resultado, user.id);
   }
   
 }
