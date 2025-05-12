@@ -61,10 +61,18 @@ export class DbService {
       .insert([partida]);
       return { data, error };
   }
+  async guardarPartidaPreguntados(partida: { 
+    id_usuario: string;   
+    correctas: number;
+    incorrectas: number;
+    resultado: string;
+  }) {
+    const { data, error } = await this.supabase
+      .from("partidas_preguntados")
+      .insert([partida]);
+      return { data, error };
+  }
 
-  
-  
-  
   
   
   async guardarChat(chat: { 

@@ -6,21 +6,33 @@
     <title>About Me Profile card || Learning Robo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="preguntados.component.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous"/>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <div class="container">
-      <h1>Preguntados</h1>
-      <div class="opciones">
-        <div class="opciones">
-          <button routerLink="conocimiento-general">Ir a Conocimiento General</button>
-          <button routerLink="deportes">Ir a Deportes</button>
-          <button routerLink="historia">Ir a Historia</button>
-          <button routerLink="geografia">Ir a Geografía</button>
-        </div>
+      @if (this.preguntas().length > 0 && !mostrarResultado) {
+      <h2>Pregunta {{ actual + 1 }} de {{ this.preguntas().length }}</h2>
+      <p>{{ this.preguntas()[actual]?.question.text }}</p>
+
+      <div>
+        @for (opcion of preguntas()[actual]?.opciones; track $index) {
+        <button (click)="responder(opcion)">
+          {{ opcion }}
+        </button>
+        }
       </div>
+      } @else if (mostrarResultado) {
+      <h2>¡Juego terminado!</h2>
+      <p>Respuestas correctas: {{ correctas }} de {{ this.preguntas().length }}</p>
+      <p>{{this.mensajeFinal}}</p>
+      <button (click)="reiniciar()">Reiniciar juego</button>
+
+      }
     </div>
   </body>
-  </html>
-  <router-outlet></router-outlet>
-  
+</html>

@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
 import { logeadoGuard } from './guards/logeado.guard';
+import { PreguntadosComponent } from './pages/preguntados/preguntados.component';
 
 export const routes: Routes = [
     {
@@ -36,14 +37,8 @@ export const routes: Routes = [
     },
     {
         path: 'preguntados',
-        // canActivate: [authGuard],
+        canActivate: [authGuard],
         loadComponent: () => import('./pages/preguntados/preguntados.component').then((modulo) => modulo.PreguntadosComponent),
-        children: [
-            { path: 'conocimiento-general', loadComponent: () => import('./pages/preguntados/categorias/categorias.component').then((modulo) => modulo.CategoriasComponent) },
-            { path: 'deportes', loadComponent: () => import('./pages/preguntados/categorias/categorias.component').then((modulo) => modulo.CategoriasComponent) },
-            { path: 'historia', loadComponent: () => import("./pages/resultados/resultados.component").then((modulo) => modulo.ResultadosComponent)},
-            { path: 'geografia', loadComponent: () => import('./pages/preguntados/categorias/categorias.component').then((modulo) => modulo.CategoriasComponent) },
-        ]
     },
     {
         path:"chat",
