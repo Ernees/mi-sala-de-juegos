@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
 import { logeadoGuard } from './guards/logeado.guard';
-import { ResultadosComponent } from './pages/resultados/resultados.component';
 
 export const routes: Routes = [
     {
@@ -36,9 +35,15 @@ export const routes: Routes = [
         canActivate:[authGuard]
     },
     {
-        path:"preguntados",
-        loadComponent: () => import("./pages/preguntados/preguntados.component").then((modulo) => modulo.PreguntadosComponent),
-        canActivate:[authGuard]
+        path: 'preguntados',
+        // canActivate: [authGuard],
+        loadComponent: () => import('./pages/preguntados/preguntados.component').then((modulo) => modulo.PreguntadosComponent),
+        children: [
+            { path: 'conocimiento-general', loadComponent: () => import('./pages/preguntados/categorias/categorias.component').then((modulo) => modulo.CategoriasComponent) },
+            { path: 'deportes', loadComponent: () => import('./pages/preguntados/categorias/categorias.component').then((modulo) => modulo.CategoriasComponent) },
+            { path: 'historia', loadComponent: () => import("./pages/resultados/resultados.component").then((modulo) => modulo.ResultadosComponent)},
+            { path: 'geografia', loadComponent: () => import('./pages/preguntados/categorias/categorias.component').then((modulo) => modulo.CategoriasComponent) },
+        ]
     },
     {
         path:"chat",
@@ -57,12 +62,12 @@ export const routes: Routes = [
     },
     {
         path: '',
-        redirectTo: 'bienvenida', // o la que quieras por defecto
+        redirectTo: 'bienvenida',
         pathMatch: 'full'
     },
     {
         path: '**',
-        redirectTo: 'bienvenida' // o alguna página de error
+        redirectTo: 'bienvenida'
     }
       
       

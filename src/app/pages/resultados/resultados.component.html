@@ -7,21 +7,40 @@
   <link rel="stylesheet" href="resultados.component.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Ranking!</h1>
+<div class="container">
+  <h1>🏆 Ranking de Jugadores</h1>
 
-        @for (jugador of ranking(); track jugador.id_usuario) {
-        <p><strong>{{ jugador.nombre }}</strong></p>
-        <p>Partidas jugadas: {{ jugador.partidas }}</p>
-        <p>Puntos: {{ jugador.puntos }}</p>
-        <hr />
-        }
-        <!-- <h1>Ranking!</h1> -->
-        <!-- @for (m of resultados(); track m.id) { 
-                <p>{{m.id_usuario}}</p>
-                <p>{{m.resultado}}</p>
-                <p>{{m.juego}}</p>
-                <p>{{m.registros?.nombre}}</p>
-       } -->
-    </div>
+  <table class="ranking-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Jugador</th>
+        <th>Partidas</th>
+        <th>Puntos</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (jugador of ranking(); track jugador.id_usuario; let i = $index) {
+        <tr>
+          <td>
+            @if (i === 0) {
+              🥇
+            } @else if (i === 1) {
+              🥈
+            } @else if (i === 2) {
+              🥉
+            } @else {
+              {{ i + 1 }}
+            }
+          </td>
+          <td>{{ jugador.nombre }}</td>
+          <td>{{ jugador.partidas }}</td>
+          <td>{{ jugador.puntos }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
 </body>
+</html>

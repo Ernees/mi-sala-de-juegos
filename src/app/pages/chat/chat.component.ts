@@ -36,7 +36,6 @@ export class ChatComponent {
     }, async (payload) => {
       const array: Mensaje[] = this.chat();
       const nuevoMensaje = payload.new as Mensaje;
-      console.log(nuevoMensaje)
       // select de la tabla usuarios
       const {data: usuario, error} = await this.db.supabase
       .from("registros")
@@ -57,20 +56,17 @@ export class ChatComponent {
     //guardo los datos antes guardados
     const mensaje = this.mensajeControl.value;
     const user = await this.authService.getDatosUsuarioActual();
-    console.log(user)
     if (!user) return;
     
     const datosChat = {
       mensaje:mensaje,
       id_usuario:user.id
     };
-  
-    console.log("Datos del chat:", datosChat);
     this.db.guardarChat(datosChat);
     this.mensajeControl.reset();
   }
+  //unsuscribe en el ngdestroy
   ngOnDestroy(){
     this.db.canal.unsubscribe();
   }
-  //unsuscribe en el ngdestroy
 }

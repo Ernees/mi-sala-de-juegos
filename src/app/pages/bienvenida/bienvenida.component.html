@@ -21,9 +21,8 @@
       } @else {
         <span class="user">HOLA! {{ authService.user()!.email }}</span><br>
         <button type="button" class="btn" (click)="cerrarSesion()">Cerrar sesión</button>
-        <button type="button" routerLink="/chat" class="btn">
-          Chat
-        </button>
+        <button type="button" routerLink="/chat" class="btn">chat</button>
+        <button type="button" routerLink="/resultados" class="btn">Ranking</button>
         }
     </div>
     <div class="cards">

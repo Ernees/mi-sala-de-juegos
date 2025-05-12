@@ -24,4 +24,28 @@ html {
     border-radius: 10px;
     overflow: hidden;
   }
-  
+h1 {
+  margin-bottom: 2rem;
+}
+
+.ranking-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.1rem;
+}
+
+.ranking-table th,
+.ranking-table td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.ranking-table th {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.ranking-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
