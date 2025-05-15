@@ -33,7 +33,7 @@ export class AdivinaNumeroComponent {
     this.generarNumero(); 
   }
   generarNumero(){
-    this.numeroSecreto = Math.floor(Math.random() * 300) + 1;
+    this.numeroSecreto = Math.floor(Math.random() * 20) + 1;
     console.log(this.numeroSecreto);
   }
   intentar() {
