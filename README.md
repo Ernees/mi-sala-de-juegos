@@ -30,13 +30,13 @@ Este proyecto es una colección de minijuegos desarrollados con Angular y Supaba
    git clone https://github.com/Ernees/mi-sala-de-juegos.git
 2. Entrá a la carpeta del proyecto:
 
-```bash
-cd mi-sala-de-juegos
-
-
-Abrí el archivo index.html con tu navegador.
-(No se necesita instalación adicional.)
-
+  ```bash
+  cd mi-sala-de-juegos
+  
+  
+  Abrí el archivo index.html con tu navegador.
+  (No se necesita instalación adicional.)
+  ```
 ---
 
 🙋‍♂️ **Autor**
