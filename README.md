@@ -1,63 +1,46 @@
-HEAD
-# ERNESTOHUERTA-TP1-PROG42025C1
+# 🎮 Mi Sala de Juegos
 
-# PrimerTp
+¡Bienvenido a **Mi Sala de Juegos**!  
+Este proyecto es una colección de minijuegos desarrollados con Angular y Supabase.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.
+---
 
-## Development server
+## 🕹️ Juegos Incluidos
 
-To start a local development server, run:
+- 🔼🔽 **Mayor o Menor** — Adiviná si el siguiente número será mayor o menor.
+- ❓🧠 **Preguntados** — Juego de preguntas y respuestas para poner a prueba tu conocimiento.
+- 🔤💀 **Ahorcado** — Adiviná la palabra secreta antes de quedarte sin intentos.
+- 🎯🔢 **Número Secreto** — Descubrí el número oculto con la menor cantidad de intentos.
 
-```bash
-ng serve
-```
+---
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🚀 Tecnologías Utilizadas
 
-## Code scaffolding
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+![Angular](https://img.shields.io/badge/Angular-DD0031?logo=angular&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?logo=supabase&logoColor=white)
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 📦 Instalación y uso local
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+1. Cloná el repositorio:
+   ```bash
+   git clone https://github.com/Ernees/mi-sala-de-juegos.git
+2. Entrá a la carpeta del proyecto:
 
 ```bash
-ng build
-```
+cd mi-sala-de-juegos
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
+Abrí el archivo index.html con tu navegador.
+(No se necesita instalación adicional.)
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+---
 
-```bash
-ng test
-```
+🙋‍♂️ **Autor**
 
-## Running end-to-end tests
+Desarrollado por **Ernesto Huerta**  
+📬 ¡Con ganas de aprender, mejorar y compartir!
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-da1f323 (initial commit)
